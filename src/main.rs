@@ -1,6 +1,6 @@
-mod day2;
+mod day1;
 
 fn main() {
-    day2::run();
+    day1::run();
 }
 

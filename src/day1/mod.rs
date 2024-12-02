@@ -1,4 +1,5 @@
 
+#[allow(dead_code)]
 pub(crate) fn run() {
     let input = std::fs::read_to_string("src/day1/input.txt").unwrap();
 
@@ -21,10 +22,22 @@ pub(crate) fn run() {
     left_values.sort();
     right_values.sort();
 
-    let diff: u32 = left_values.iter()
+    //let number: u32 = sum_part1(&mut left_values, right_values);
+    let number: u32 = sum_part2(&mut left_values, &right_values);
+    println!("{}", number);
+}
+
+#[allow(dead_code)]
+fn sum_part1(left_values: &mut Vec<i32>, right_values: &Vec<i32>) -> u32 {
+    left_values.iter()
         .zip(right_values.iter())
         .map(|(&left, &right)| left.abs_diff(right))
-        .sum();
+        .sum()
+}
 
-    println!("{}", diff);
+#[allow(dead_code)]
+fn sum_part2(left_values: &mut Vec<i32>, right_values: &Vec<i32>) -> u32 {
+    left_values.iter()
+        .map(|&left| right_values.iter().filter(|&&right| right == left).count() as u32 * left as u32)
+        .sum()
 }

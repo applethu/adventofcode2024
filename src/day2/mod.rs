@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 pub fn run() {
     let input = std::fs::read_to_string("src/day2/input.txt").unwrap();
 
@@ -17,11 +18,13 @@ fn is_safe(a: i32, b: i32, increasing: bool) -> bool {
     a != b && a.abs_diff(b) <= 3 && (a < b) == increasing
 }
 
+#[allow(dead_code)]
 fn validate_part1(parts: &Vec<i32>) -> bool {
     let increasing = parts[0] < parts[1];
     parts.windows(2).all(|w| is_safe(w[0], w[1], increasing))
 }
 
+#[allow(dead_code)]
 fn validate_part2(parts: &Vec<i32>) -> bool {
     if validate_part1(&parts) {
         return true
