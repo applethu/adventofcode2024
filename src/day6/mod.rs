@@ -1,15 +1,33 @@
 pub fn run() {
     let input = std::fs::read_to_string("src/day6/input.txt").unwrap();
-    let mut input2: Vec<Vec<char>> = input.lines()
+    let input2: Vec<Vec<char>> = input.lines()
         .map(|line| line.chars().collect())
         .collect();
 
+    let mut sum_infinite_count = 0;
+    for i in 0..input2.len() {
+        for j in 0..input2[i].len() {
+            let mut input3 = input2.clone();
+            if input3[i][j] == '.' {
+                input3[i][j] = '#';
+                if mainfunction(&mut input3) {
+                    sum_infinite_count += 1;
+                }
+            }
+        }
+    }
+    print!("SUM INFINITE COUNT: {}", sum_infinite_count);
+}
+
+fn mainfunction(mut input2: &mut Vec<Vec<char>>) -> bool {
     let directions = [(-1, 0), (0, 1), (1, 0), (0, -1)];
     let mut current_dir_idx = 0;
 
     let dimensions = (input2.len() as i32, input2[0].len() as i32);
     let mut current_pos = find_start(&input2).unwrap();
-    while is_inside_range(dimensions, current_pos) {
+    let mut sumsteps = 0;
+    while is_inside_range(dimensions, current_pos) && sumsteps < dimensions.0 * dimensions.1 {
+        sumsteps += 1;
         mark_pos_at(&mut input2, current_pos.0, current_pos.1);
 
         let mut dirchange = 0;
@@ -27,9 +45,10 @@ pub fn run() {
             }
         }
     }
-
-    let sum = input2.iter().flatten().filter(|&&c| c == 'X').count();
-    println!("SUM: {}", sum);
+    //PART 1
+    //let sum = input2.iter().flatten().filter(|&&c| c == 'X').count();
+    //println!("SUM: {}", sum);
+    sumsteps == dimensions.0 * dimensions.1
 }
 
 fn is_blocked(input: &[Vec<char>], row: i32, col: i32) -> bool {
