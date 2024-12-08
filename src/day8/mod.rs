@@ -13,9 +13,10 @@ pub fn run() {
         for j in 0..input2[i].len() {
             for k in 0..input2.len() {
                 for l in 0..input2[i].len() {
+                    /* PART 1
                     if i ==  k && j == l {
                         continue;
-                    }
+                    } */
                     if input2[k][l] == '.' {
                         continue;
                     }
@@ -28,6 +29,7 @@ pub fn run() {
             }
         }
     }
+
     for i in 0..input2.len() {
         for j in 0..input2[i].len() {
             let distancemap = distances.get(&(i as i64, j as i64)).unwrap();
@@ -35,7 +37,7 @@ pub fn run() {
             distancemap.iter().for_each(|(_key, value)| {
                 for m in 0..value.len() {
                     for n in m+1..value.len() {
-                        if (value[m].0*2.0 - value[n].0).abs() < epsilon || (value[n].0*2.0 - value[m].0).abs() < epsilon{
+                        // PART 1:if (value[m].0*2.0 - value[n].0).abs() < epsilon || (value[n].0*2.0 - value[m].0).abs() < epsilon{
                             let c1 = value[m].1;
                             let c2 = value[n].1;
                             let c3 = (i as i64, j as i64);
@@ -44,7 +46,7 @@ pub fn run() {
                                 antinodes.insert((i as i64, j as i64));
                                 break;
                             }
-                        }
+                        //}
                     }
                 }
             });
