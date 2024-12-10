@@ -23,12 +23,17 @@ pub fn run() {
         all_paths.extend(paths);
     }
 
-    let unique_start_end_pairs: HashSet<((usize, usize), (usize, usize))> = all_paths
-        .iter()
-        .map(|path| (path.first().cloned().unwrap(), path.last().cloned().unwrap()))
-        .collect();
+    // PART 1
+    // let unique_start_end_pairs: HashSet<((usize, usize), (usize, usize))> = all_paths
+    //     .iter()
+    //     .map(|path| (path.first().cloned().unwrap(), path.last().cloned().unwrap()))
+    //     .collect();
+    //
+    // println!("Unique start and end coordinate pairs: {}", unique_start_end_pairs.len());
 
-    println!("Unique start and end coordinate pairs: {}", unique_start_end_pairs.len());
+    // PART 2
+    let distinct_paths: HashSet<Vec<(usize, usize)>> = all_paths.into_iter().collect();
+    println!("Distinct paths: {}", distinct_paths.len());
 }
 
 fn find_paths(map: &Vec<Vec<u64>>, start: (usize, usize)) -> Vec<Vec<(usize, usize)>> {
