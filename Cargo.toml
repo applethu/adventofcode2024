@@ -6,3 +6,5 @@ edition = "2021"
 [dependencies]
 #day 3
 regex = "1.11.1"
+#day 11
+num-integer = "0.1.46"
